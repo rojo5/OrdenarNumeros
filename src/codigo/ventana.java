@@ -28,21 +28,22 @@ public class ventana extends javax.swing.JFrame {
         for(int i=0;i<numeros.size();i++){
             aux[i]= numeros.get(i);
         }
+
+        boolean chivato=true;
         int mayor;
-        int menor;
-        int chivato = 0;
-        while(chivato <aux.length){
-            for(int i =0;i<aux.length-1;i++){
-                 if (aux[i] > aux[i + 1]) {
-                    mayor = aux[i];
-                    menor = aux[i + 1];
-                    aux[i] = menor;
-                    aux[i + 1] = mayor;
-                    chivato++;
+        while(chivato){
+            chivato=false;
+            for(int i=0;i<aux.length-1;i++){
+                if (aux[i] > aux[i + 1]){
+                    mayor= aux[i];
+                    aux[i]=aux[i+1];
+                    aux[i+1]=mayor;
+                    chivato=true;
                 }
             }
         }
-        jTextArea1.append("");
+
+        jTextArea1.setText("");
         for(int i=0;i<aux.length;i++){
             jTextArea1.append(aux[i] + " ");
         }
@@ -68,9 +69,10 @@ public class ventana extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnInsertar = new javax.swing.JButton();
         numInsert = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnOrdenar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,17 +80,24 @@ public class ventana extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("Insertar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnInsertar.setText("Insertar");
+        btnInsertar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
+                btnInsertarMousePressed(evt);
             }
         });
 
-        jButton2.setText("Ordenar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnOrdenar.setText("Ordenar");
+        btnOrdenar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton2MousePressed(evt);
+                btnOrdenarMousePressed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEliminarMousePressed(evt);
             }
         });
 
@@ -99,36 +108,39 @@ public class ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(numInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInsertar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(numInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(numInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btnInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addGap(70, 70, 70))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+    private void btnInsertarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsertarMousePressed
         // TODO add your handling code here:
         System.out.println(lista.size());
         int numero;
@@ -142,13 +154,21 @@ public class ventana extends javax.swing.JFrame {
        
         
         
-    }//GEN-LAST:event_jButton1MousePressed
+    }//GEN-LAST:event_btnInsertarMousePressed
 
-    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+    private void btnOrdenarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenarMousePressed
         // TODO add your handling code here:
         ordenaBurbuja(lista);
         
-    }//GEN-LAST:event_jButton2MousePressed
+    }//GEN-LAST:event_btnOrdenarMousePressed
+
+    private void btnEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMousePressed
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+        lista.clear();
+        posicion=0;
+        
+    }//GEN-LAST:event_btnEliminarMousePressed
 
     /**
      * @param args the command line arguments
@@ -186,8 +206,9 @@ public class ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnOrdenar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField numInsert;
